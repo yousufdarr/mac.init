@@ -1,28 +1,66 @@
-# Mac Development Environment Setup
+# macOS System Setup Script
 
-Automated setup scripts for a fresh macOS development environment.
+This script automates the setup of a fresh macOS system with development tools, applications, and system configurations.
 
-## 🚀 Quick Setup
+## 🚨 Security Warning
 
-1. Clone this repository
-2. Make the scripts executable:
-   ```bash
-   chmod +x *.sh
-   ```
-3. Run the setup script:
-   ```bash
-   ./setup_dev_environment.sh
-   ```
+Before running this script, please be aware of the following security considerations:
 
-## 📦 What Gets Installed
+1. **Never blindly run scripts from the internet** using `curl | bash`. This is dangerous because:
+   - The connection could be intercepted (MITM attack)
+   - The source could be compromised
+   - The script could be modified during transfer
 
-### Command Line Tools
-- Homebrew (package manager)
-- Git
-- Node.js
-- GitHub CLI (gh)
-- GPG and pinentry-mac (for commit signing)
-- Zsh with Oh My Zsh
+2. **Recommended Usage:**
+   - Download the script first
+   - Review the code thoroughly
+   - Run it locally after verification
+
+## 🚀 Usage
+
+### Safe Method (Recommended)
+
+```bash
+# Download the script
+curl -O https://your-domain.com/macos_setup.sh
+
+# Review the script content
+less macos_setup.sh
+
+# Make it executable
+chmod +x macos_setup.sh
+
+# Run the script
+./macos_setup.sh
+```
+
+### Direct Method (Not Recommended)
+
+```bash
+curl -fsSL https://your-domain.com/macos_setup.sh | bash
+```
+
+## ✨ Features
+
+### Package Management
+- Installs and configures Homebrew
+- Configures necessary Homebrew taps:
+  - homebrew/bundle
+  - homebrew/core
+  - homebrew/cask
+  - mitchellh/ghostty
+  - buo/cask-upgrade
+  - homebrew/cask-fonts
+
+### Development Tools
+- Essential CLI tools:
+  - git
+  - node
+  - zsh (with completions and syntax highlighting)
+  - mas (Mac App Store CLI)
+  - gh (GitHub CLI)
+  - gnupg
+  - pinentry-mac
 
 ### Applications
 - Visual Studio Code
@@ -33,16 +71,27 @@ Automated setup scripts for a fresh macOS development environment.
 - Fira Code
 - JetBrains Mono
 
-## 🔧 Post-Setup Configuration
+### System Configuration
+- Shows hidden files in Finder
+- Sets optimal key repeat rates
+- Configures Finder preferences
+- Disables boot sound
+- Shows file extensions globally
+- Enables Finder status and path bars
 
-### 1. GPG Setup for Git Commit Signing
+### GPG Setup
+- Configures GPG for secure commit signing
+- Sets up pinentry-mac for password prompts
+- Configures GPG agent with sensible cache timeouts
+- Adds necessary environment variables to shell
+- Provides guidance for key generation and management
 
-Run the GPG setup script:
-```bash
-./setup_gpg.sh
-```
+## 🔧 Post-Setup Tasks
 
-Then set up your GPG key:
+### 1. GPG Key Generation
+
+After the script completes, you can set up your GPG key:
+
 ```bash
 # Generate a new GPG key
 gpg --full-generate-key
@@ -65,26 +114,26 @@ Add to GitHub:
 3. Click "New GPG key"
 4. Paste your public key
 
-### 2. Oh My Zsh Configuration
+### 2. Shell Configuration
 
-Edit `~/.zshrc` to add useful plugins:
-```bash
-# Recommended plugins
-plugins=(
-  git
-  node
-  npm
-  docker
-  zsh-syntax-highlighting
-)
+The script configures Zsh with syntax highlighting. You may want to:
+- Choose a different theme
+- Add additional plugins
+- Customize your prompt
 
-# Optional: Change theme
-ZSH_THEME="agnoster"
-```
+## 💻 Compatibility
 
-Note: The setup script automatically adds useful aliases including:
-- `bu` - shorthand for `brew update && brew upgrade`
+- Designed for macOS with Apple Silicon
+- Compatible with Intel Macs (automatically detects architecture)
+- Tested on macOS Sonoma (14.0) and later
 
-### 3. Ghostty Configuration
+## ⚠️ Notes
 
-Create or edit `
+- Some changes require a system restart to take effect
+- The script is idempotent (safe to run multiple times)
+- Gatekeeper disable option is commented out by default for security
+- Requires admin privileges for some operations (will prompt for sudo password)
+
+## 🤝 Contributing
+
+Feel free to fork and modify this script for your needs. If you make improvements, please consider submitting a pull request. 
