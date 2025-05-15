@@ -5,12 +5,21 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-echo "🍺 Installing Homebrew..."
+echo "🍺 Starting Homebrew installation..."
 
 # Check if Homebrew is already installed
 if command -v brew &>/dev/null; then
     echo -e "${RED}Homebrew is already installed!${NC}"
     exit 0
+fi
+
+# Install Xcode Command Line Tools if not installed
+if ! command -v xcode-select &>/dev/null; then
+    echo "📦 Installing Xcode Command Line Tools..."
+    xcode-select --install
+    echo "⏳ Waiting for Xcode Command Line Tools installation..."
+    echo "Please complete the installation window that has opened..."
+    read -p "Press enter once installation is complete..."
 fi
 
 # Install Homebrew
